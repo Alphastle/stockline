@@ -144,7 +144,7 @@ def handle_message(event):
                 config=search_generation_config
             ).text
 
-            out = completion
+            out = completion + '\n\n這是大模型教學教學專案，請勿作為正式投資建議！ 請輸入台灣股市股票代號，例如台積電請輸入 2330'
 
         except Exception as e:
             out = f"Gemini執行出錯! 錯誤細節: {str(e)}"
@@ -153,10 +153,6 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=out))
-        # 提醒 LINE 使用者
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text='這是大模型教學教學專案，請勿作為正式投資建議！ 請輸入台灣股市股票代號，例如台積電請輸入 2330'))
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=7860, reload=True)
