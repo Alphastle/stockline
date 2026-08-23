@@ -144,7 +144,7 @@ def handle_message(event):
                 config=search_generation_config
             ).text
 
-            out = completion + '\n\n這是大模型教學教學專案，請勿作為正式投資建議！ 請輸入台灣股市股票代號，例如台積電請輸入 2330'
+            out = completion + '\n\n這是大模型教學專案，請勿作為正式投資建議！\n\n請輸入台灣股市股票代號，例如台積電請輸入 2330'
 
         except Exception as e:
             out = f"Gemini執行出錯! 錯誤細節: {str(e)}"
