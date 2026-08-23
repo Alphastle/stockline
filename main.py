@@ -133,7 +133,7 @@ def handle_message(event):
                 # 不下載 PDF，直接由 Gemini 連網搜尋櫃買中心與最新股價籌碼資訊
                 prompt = (
                     f"請透過網路搜尋 https://www.tpex.org.tw/zh-tw/mainboard/listed/company-detail.html?{question} 最新的即時個股資訊!"
-                    f"你是投信分析師，請使用繁體中文2000字以內，分項說明公司股市價量表現、融資融卷、內外資進出及財務資訊，並分析近期公司股市展望給投資人具體的專業建議,包含股價支撐與壓力!"
+                    f"請結合這份即時個股資訊與最新網路資訊，依系統指令給予專業建議！"
                 )
                 contents = [prompt]
 
@@ -153,6 +153,10 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=out))
+        # 提醒 LINE 使用者
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='這是大模型教學教學專案，請勿作為正式投資建議！ 請輸入台灣股市股票代號，例如台積電請輸入 2330'))
 
 if __name__ == "__main__":
     uvicorn.run("main:app", host="0.0.0.0", port=7860, reload=True)
